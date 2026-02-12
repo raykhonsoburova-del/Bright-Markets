@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bright Savdo | Premium Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #3b82f6;
+            --accent: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --success: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            padding: 15px 8%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            letter-spacing: -1.5px;
+        }
+
+        .search-container {
+            flex-grow: 0.6;
+            margin: 0 30px;
+        }
+
+        .search-container input {
+            width: 100%;
+            padding: 12px 25px;
+            border-radius: 50px;
+            border: 2px solid #e2e8f0;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .search-container input:focus { border-color: var(--primary); }
+
+        .nav-btns { display: flex; gap: 20px; align-items: center; }
+        
+        .login-btn {
+            background: var(--primary);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 80vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 0 5%;
+        }
+
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.4rem; margin-bottom: 30px; max-width: 800px; opacity: 0.9; }
+
+        .btn-cta {
+            background: var(--accent);
+            color: white;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            box-shadow: 0 10px 20px rgba(245, 158, 11, 0.4);
+            transition: 0.3s;
+        }
+        .btn-cta:hover { transform: scale(1.05); background: #d97706; }
+
+        /* --- KATEGORIYALAR --- */
+        .cats-section {
+            padding: 60px 8%;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            overflow-x: auto;
+            background: white;
+        }
+
+        .cat-item {
+            text-align: center;
+            min-width: 120px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .cat-item:hover { transform: translateY(-5px); color: var(--primary); }
+        .cat-icon {
+            font-size: 2.5rem;
+            height: 90px; width: 90px;
+            background: #f1f5f9;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
+        }
+
+        /* --- MAHSULOTLAR --- */
+        .container { padding: 80px 8%; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.4s;
+            border: 1px solid #edf2f7;
+            position: relative;
+        }
+
+        .card:hover { transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        .card-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .card-body { padding: 25px; }
+        .card-body h3 { font-size: 1.3rem; margin-bottom: 15px; color: var(--dark); }
+        
+        .price-tag {
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: 800;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .buy-now {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            background: var(--dark);
+            color: white;
+            border-radius: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .buy-now:hover { background: var(--primary); }
+
+        /* --- JALB QILUVCHI FOOTER --- */
+        footer {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1556742044-3c52d6e88c62?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background-size: cover;
+            padding: 100px 8% 40px;
+            margin-top: 100px;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255, 255, 255, 0.93);
+            z-index: 1;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+        }
+
+        .footer-col h4 { color: var(--primary); font-size: 1.4rem; margin-bottom: 25px; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { text-decoration: none; color: #475569; font-weight: 500; transition: 0.3s; }
+        .footer-col ul li a:hover { color: var(--primary); padding-left: 8px; }
+
+        /* --- BOSH HOMIY ANIMATSIYASI --- */
+        .sponsor-section {
+            position: relative;
+            z-index: 2;
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .sponsor-title {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .sponsor-link {
+            display: inline-block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 10px 30px;
+            border-radius: 15px;
+            transition: 0.4s;
+            position: relative;
+            animation: pulse-glow 2s infinite ease-in-out;
+        }
+
+        .sponsor-link:hover {
+            transform: scale(1.1) translateY(-5px);
+            color: #1d4ed8;
+            text-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+        }
+
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+        }
+
+        .footer-bottom {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #cbd5e1;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .search-container { width: 100%; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">BRIGHT</a>
+        <div class="search-container">
+            <input type="text" placeholder="Istagan mahsulotingizni qidiring...">
+        </div>
+        <div class="nav-btns">
+            <a href="#" style="text-decoration:none; color:var(--dark); font-weight:600;">Yordam</a>
+            <a href="#" class="login-btn">Kirish</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Siz orzu qilgan mahsulotlar <br> endi bir qadam masofada!</h1>
+        <p>O'zbekistondagi eng ishonchli va eng tezkor yetkazib beruvchi marketplace platformasi.</p>
+        <a href="#katalog" class="btn-cta">Hozir xarid qilish</a>
+    </section>
+
+    <div class="cats-section">
+        <div class="cat-item">
+            <div class="cat-icon">📱</div>
+            <p>Smartfonlar</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">💻</div>
+            <p>Noutbuklar</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">🏠</div>
+            <p>Uy uchun</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">🚗</div>
+            <p>Avto-ehtiyot</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">👕</div>
+            <p>Kiyimlar</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">🧸</div>
+            <p>O'yinchoqlar</p>
+        </div>
+        <div class="cat-item">
+            <div class="cat-icon">⚡</div>
+            <p>Aksiyalar</p>
+        </div>
+    </div>
+
+    <div class="container" id="katalog">
+        <h2 style="font-size: 2.5rem; margin-bottom: 40px; text-align: center;">🔥 Haftaning eng yaxshi takliflari</h2>
+        
+        <div class="grid">
+            <div class="card">
+                <img src="https://frankfurt.apollo.olxcdn.com/v1/files/wm5hjd3l6d7y-UZ/image;s=1000x700" alt="Mahsulot 1" class="card-img">
+                <div class="card-body">
+                    <h3>Premium Apple iPhone 15 Pro Max - Titanium</h3>
+                    <span class="price-tag">7 000 000 so'm</span>
+                    <button class="buy-now">Savatchaga qo'shish</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://frankfurt.apollo.olxcdn.com/v1/files/m0w77819zppm1-UZ/image;s=1000x700" alt="Mahsulot 2" class="card-img">
+                <div class="card-body">
+                    <h3>MacBook Air M3 - Professional ish stansiyasi</h3>
+                    <span class="price-tag">7 000 000 so'm</span>
+                    <button class="buy-now">Savatchaga qo'shish</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=2070&auto=format&fit=crop" alt="Mahsulot 3" class="card-img">
+                <div class="card-body">
+                    <h3>Studio Pro Headphones - Hi-Fi Audio</h3>
+                    <span class="price-tag">1 500 000 so'm</span>
+                    <button class="buy-now">Savatchaga qo'shish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <a href="#" class="logo">BRIGHT</a>
+                <p style="margin-top: 20px;">Sizning baxtli xaridlaringiz bizning asosiy maqsadimiz. O'zbekistonning barcha nuqtalariga ishonchli va tezkor yetkazib berish xizmati.</p>
+                <div style="margin-top: 20px; font-size: 2rem;">💳 📦 🚚 🛡️</div>
+            </div>
+            
+            <div class="footer-col">
+                <h4>Xaridorlarga</h4>
+                <ul>
+                    <li><a href="#">Qanday buyurtma berish mumkin?</a></li>
+                    <li><a href="#">Yetkazib berish shartlari</a></li>
+                    <li><a href="#">To'lov usullari</a></li>
+                    <li><a href="#">Muddatli to'lov (Nasiya)</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Hamkorlik</h4>
+                <ul>
+                    <li><a href="#">Sotuvchi bo'lish</a></li>
+                    <li><a href="#">Kuryerlik xizmati</a></li>
+                    <li><a href="#">Hamkorlik dasturi</a></li>
+                    <li><a href="#">Vakansiyalar</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Aloqa</h4>
+                <p>📍 Toshkent sh., IT Park binosi</p>
+                <p>📞 +998 71 200-00-00</p>
+                <p>📧 info@brightsavdo.uz</p>
+            </div>
+        </div>
+
+        <div class="sponsor-section">
+            <span class="sponsor-title">BOSH HOMIY</span>
+            <a href="https://codevent.uz/" target="_blank" class="sponsor-link">Codevent.uz</a>
+        </div>
+        
+        <div class="footer-bottom">
+            © 2026 Bright Savdo | O'zbekistondagi №1 Milliy Marketplace
+        </div>
+    </footer>
+
+</body>
+</html>
